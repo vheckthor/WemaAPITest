@@ -22,10 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Helpers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\WemaAPI\WemaAPI.csproj" />
     <ProjectReference Include="..\WemaInfrastructure\WemaInfrastructure.csproj" />
   </ItemGroup>
