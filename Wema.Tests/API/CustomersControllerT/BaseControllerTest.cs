@@ -1,7 +1,6 @@
 ﻿using Moq;
 using WemaAPI.Controllers;
 using WemaCore.Interfaces;
-using WemaInfrastructure.Helpers;
 using WemaInfrastructure.Helpers.Interfaces;
 using WemaInfrastructure.Repository.CustomerRepository;
 

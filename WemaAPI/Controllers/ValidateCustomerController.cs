@@ -48,12 +48,12 @@ namespace WemaAPI.Controllers
 			{
 				return BadRequest(AppConstants.INVALIDOTP);
 			}
-			var customerAlreadyOnboared = await _customerData.CustomerAlreadyOnboarded(request.Phonenumber);
+			var customerAlreadyOnboared = await _customerData.CustomerAlreadyOnboardedAsync(request.Phonenumber);
 			if (customerAlreadyOnboared) 
 			{
 				return BadRequest(AppConstants.ERRORCUSTOMERALREADYONBOARDED);
 			}
-			var onboardCustomerSuccessFully =await _customerData.OnboardCustomerAsyc(request.Phonenumber, otpIsValid);
+			var onboardCustomerSuccessFully =await _customerData.OnboardCustomerAsync(request.Phonenumber, otpIsValid);
 			if (!onboardCustomerSuccessFully)
 			{
 				return BadRequest(AppConstants.SAVEERROR);

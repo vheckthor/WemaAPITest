@@ -38,7 +38,10 @@ namespace WemaAPI.Controllers
 			{
 				return NotFound(AppConstants.DATANOTFOUND);
 			}
-			Response.AddPagination(customers.CurrentPage, customers.PageSize, customers.TotalCount, customers.TotalPages);
+			Response.AddPagination(customers.CurrentPage,
+						  customers.PageSize,
+						  customers.TotalCount,
+						  customers.TotalPages);
 			return Ok(customers);
 		}
 

@@ -7,6 +7,7 @@ using WemaInfrastructure.Logger;
 using WemaInfrastructure.Repository.CustomerRepository;
 using WemaInfrastructure.Helpers.Interfaces;
 using WemaInfrastructure.Helpers;
+using WemaInfrastructure.ExternalEndpoints;
 
 namespace WemaInfrastructure.Extensions
 {
@@ -39,6 +40,7 @@ namespace WemaInfrastructure.Extensions
 			services.AddScoped<ICustomerDataRepository, CustomerDataRepository>();
 			services.AddSingleton<ICacheStateAndLGA, CacheStateAndLGA>();
 			services.AddScoped<IMockOTPValidation, MockOTPValidation>();
+			services.AddScoped<IGetListofBanks, GetListofBanks>();
 			services.AddScoped<ICheckLGAToStateMapping, CheckLGAToStateMapping>();
 			services.AddSingleton<IFileLogger, AppLoggerService>();
 

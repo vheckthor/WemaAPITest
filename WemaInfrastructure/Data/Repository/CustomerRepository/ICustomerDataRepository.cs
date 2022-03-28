@@ -12,7 +12,7 @@ namespace WemaInfrastructure.Repository.CustomerRepository
 		Task<PagedList<GetCustomerResponse>> GetAllCustomersAsync(UserParams param);
 		Task<GetCustomerResponse> GetACustomerAsync(string email);
 		Task<bool> UserExistsAsync(string username, string phoneNumber);
-		Task<bool> OnboardCustomerAsyc(string phonenumber, bool otpValid);
-		Task<bool> CustomerAlreadyOnboarded(string phoneNumber);
+		Task<bool> OnboardCustomerAsync(string phonenumber, bool otpValid);
+		Task<bool> CustomerAlreadyOnboardedAsync(string phoneNumber);
 	}
 }

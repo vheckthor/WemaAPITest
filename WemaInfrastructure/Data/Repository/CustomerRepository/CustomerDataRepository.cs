@@ -98,7 +98,7 @@ namespace WemaInfrastructure.Repository.CustomerRepository
 			return await PagedList<GetCustomerResponse>.CreateAsync(customersList, param.PageNumber, param.PageSize);
 		}
 
-		public async Task<bool> OnboardCustomerAsyc(string phonenumber, bool otpValid)
+		public async Task<bool> OnboardCustomerAsync(string phonenumber, bool otpValid)
 		{
 			var customer = await _context.Customers.FirstOrDefaultAsync(_ => _.PhoneNumber == phonenumber);
 			if(customer == null)
@@ -110,7 +110,7 @@ namespace WemaInfrastructure.Repository.CustomerRepository
 			return await _context.SaveChangesAsync() > 0;
 		}
 
-		public Task<bool> CustomerAlreadyOnboarded(string phoneNumber)
+		public Task<bool> CustomerAlreadyOnboardedAsync(string phoneNumber)
 		{
 			return _context.Customers.AnyAsync(_ => _.PhoneNumber == phoneNumber && _.Onboarded == true);
 		}

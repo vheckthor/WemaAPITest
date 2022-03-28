@@ -1,8 +1,4 @@
 ﻿using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Wema.Tests.Infrastructure.Helpers;
 using WemaCore.DTOs.ApiResponse;
@@ -10,6 +6,7 @@ using WemaCore.Interfaces;
 using WemaInfrastructure;
 using WemaInfrastructure.Helpers;
 using WemaInfrastructure.Repository.CustomerRepository;
+using WemaCore.Entities;
 using Xunit;
 
 namespace Wema.Tests.Infrastructure.CustomerRepository
@@ -22,7 +19,7 @@ namespace Wema.Tests.Infrastructure.CustomerRepository
 			var _fileLoggerMock = new Mock<IFileLogger>();
 			AppDbContext context = DbHelpers.InitContext("TestDB");
 
-			await context.Customers.AddAsync(new WemaCore.Entities.Customer {Email = "ade@gmail.com", PhoneNumber = "23470321235356" });
+			await context.Customers.AddAsync(new Customer { Email = "ade@gmail.com", PhoneNumber = "23470321235356" });
 			var saved = await context.SaveChangesAsync() > 0;
 			Assert.True(saved);
 			var command = new CustomerDataRepository(context, _fileLoggerMock.Object);
@@ -38,7 +35,7 @@ namespace Wema.Tests.Infrastructure.CustomerRepository
 			var _fileLoggerMock = new Mock<IFileLogger>();
 			AppDbContext context = DbHelpers.InitContext("MyDB");
 
-			await context.Customers.AddAsync(new WemaCore.Entities.Customer {Email = "ade@gmail.com", PhoneNumber = "23470321235356" });
+			await context.Customers.AddAsync(new Customer { Email = "ade@gmail.com", PhoneNumber = "23470321235356" });
 			var saved = await context.SaveChangesAsync() > 0;
 			Assert.True(saved);
 			var command = new CustomerDataRepository(context, _fileLoggerMock.Object);
@@ -75,8 +72,8 @@ namespace Wema.Tests.Infrastructure.CustomerRepository
 			AppDbContext context = DbHelpers.InitContext("TestDB");
 
 			await context.Customers.AddRangeAsync(
-				new WemaCore.Entities.Customer { Email = "ade@gmail.com", PhoneNumber = "23470321235356" },
-				new WemaCore.Entities.Customer { Email = "gre@gmail.com", PhoneNumber = "23407249575234"});
+				new Customer { Email = "ade@gmail.com", PhoneNumber = "23470321235356" },
+				new Customer { Email = "gre@gmail.com", PhoneNumber = "23407249575234"});
 			var saved = await context.SaveChangesAsync() > 0;
 
 			var command = new CustomerDataRepository(context, _mock.Object);
@@ -94,11 +91,11 @@ namespace Wema.Tests.Infrastructure.CustomerRepository
 			AppDbContext context = DbHelpers.InitContext("MeDB");
 
 			await context.Customers.AddRangeAsync(
-				new WemaCore.Entities.Customer { Email = "ade@gmail.com", PhoneNumber = "23470321235356", Onboarded = true },
-				new WemaCore.Entities.Customer { Email = "gre@gmail.com", PhoneNumber = "23407249575234" });
+				new Customer { Email = "ade@gmail.com", PhoneNumber = "23470321235356", Onboarded = true },
+				new Customer { Email = "gre@gmail.com", PhoneNumber = "23407249575234" });
 			var saved = await context.SaveChangesAsync() > 0;
 			var command = new CustomerDataRepository(context, _mock.Object);
-			var exc =await command.CustomerAlreadyOnboarded("23470321235356");
+			var exc =await command.CustomerAlreadyOnboardedAsync("23470321235356");
 			Assert.True(exc);
 		}
 
@@ -109,11 +106,11 @@ namespace Wema.Tests.Infrastructure.CustomerRepository
 			AppDbContext context = DbHelpers.InitContext("TestDB");
 
 			await context.Customers.AddRangeAsync(
-				new WemaCore.Entities.Customer { Email = "ade@gmail.com", PhoneNumber = "23470321235356", Onboarded = true },
-				new WemaCore.Entities.Customer { Email = "gre@gmail.com", PhoneNumber = "23407249575234" });
+				new Customer { Email = "ade@gmail.com", PhoneNumber = "23470321235356", Onboarded = true },
+				new Customer { Email = "gre@gmail.com", PhoneNumber = "23407249575234" });
 			var saved = await context.SaveChangesAsync() > 0;
 			var command = new CustomerDataRepository(context, _mock.Object);
-			var exc = await command.CustomerAlreadyOnboarded("23407249575234");
+			var exc = await command.CustomerAlreadyOnboardedAsync("23407249575234");
 			Assert.False(exc);
 		}
 	
@@ -124,11 +121,11 @@ namespace Wema.Tests.Infrastructure.CustomerRepository
 			AppDbContext context = DbHelpers.InitContext("TestDB");
 
 			await context.Customers.AddRangeAsync(
-				new WemaCore.Entities.Customer { Email = "ade@gmail.com", PhoneNumber = "23470321235446" },
-				new WemaCore.Entities.Customer { Email = "gre@gmail.com", PhoneNumber = "23407249575223" });
+				new Customer { Email = "ade@gmail.com", PhoneNumber = "23470321235446" },
+				new Customer { Email = "gre@gmail.com", PhoneNumber = "23407249575223" });
 			var saved = await context.SaveChangesAsync() > 0;
 			var command = new CustomerDataRepository(context, _mock.Object);
-			var exc = await command.OnboardCustomerAsyc("23407249575223", true);
+			var exc = await command.OnboardCustomerAsync("23407249575223", true);
 			Assert.True(exc);
 		}
 
@@ -139,11 +136,11 @@ namespace Wema.Tests.Infrastructure.CustomerRepository
 			AppDbContext context = DbHelpers.InitContext("TestDB");
 
 			await context.Customers.AddRangeAsync(
-				new WemaCore.Entities.Customer { Email = "ade@gmail.com", PhoneNumber = "23470321235446" },
-				new WemaCore.Entities.Customer { Email = "gre@gmail.com", PhoneNumber = "23407249575223" });
+				new Customer { Email = "ade@gmail.com", PhoneNumber = "23470321235446" },
+				new Customer { Email = "gre@gmail.com", PhoneNumber = "23407249575223" });
 			var saved = await context.SaveChangesAsync() > 0;
 			var command = new CustomerDataRepository(context, _mock.Object);
-			var exc = await command.OnboardCustomerAsyc("23407249575323", true);
+			var exc = await command.OnboardCustomerAsync("23407249575323", true);
 			Assert.False(exc);
 		}
 
@@ -154,12 +151,12 @@ namespace Wema.Tests.Infrastructure.CustomerRepository
 			AppDbContext context = DbHelpers.InitContext("TestDB");
 
 			await context.Customers.AddRangeAsync(
-				new WemaCore.Entities.Customer { Email = "ade@gmail.com", PhoneNumber = "23470321235446", Onboarded = true },
-				new WemaCore.Entities.Customer { Email = "are@gmail.com", PhoneNumber = "23470321235446", Onboarded = true },
-				new WemaCore.Entities.Customer { Email = "arewe@gmail.com", PhoneNumber = "23470323235446", Onboarded = true },
-				new WemaCore.Entities.Customer { Email = "andoe@gmail.com", PhoneNumber = "23470353235546" },
-				new WemaCore.Entities.Customer { Email = "grower@gmail.com", PhoneNumber = "23470751235546" },
-				new WemaCore.Entities.Customer { Email = "gre@gmail.com", PhoneNumber = "23407249575223" });
+				new Customer { Email = "ade@gmail.com", PhoneNumber = "23470321235446", Onboarded = true },
+				new Customer { Email = "are@gmail.com", PhoneNumber = "23470321235446", Onboarded = true },
+				new Customer { Email = "arewe@gmail.com", PhoneNumber = "23470323235446", Onboarded = true },
+				new Customer { Email = "andoe@gmail.com", PhoneNumber = "23470353235546" },
+				new Customer { Email = "grower@gmail.com", PhoneNumber = "23470751235546" },
+				new Customer { Email = "gre@gmail.com", PhoneNumber = "23407249575223" });
 			var saved = await context.SaveChangesAsync() > 0;
 			var command = new CustomerDataRepository(context, _mock.Object);
 			var exc = await command.GetAllCustomersAsync(new WemaCore.Helpers.UserParams());

@@ -16,12 +16,12 @@ namespace Wema.Tests.Infrastructure
 		public async Task GetFromCacheAsync_Should_Get_Data_From_Cache()
 		{
 			var mockCacheEntry = new Mock<ICacheEntry>();
-			string? keyPayload = null;
+			string keyPayload = null;
 			mockCache.Setup(mc => mc.CreateEntry(It.IsAny<string>()))
 				.Callback((object k) => keyPayload = (string) k)
 				.Returns(mockCacheEntry.Object);
 
-			object? valuePayload = null;
+			object valuePayload = null;
 			mockCacheEntry
 				.SetupSet(mce => mce.Value = It.IsAny<object>())
 				.Callback<object>(v => valuePayload = v);

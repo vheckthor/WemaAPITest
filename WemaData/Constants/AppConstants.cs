@@ -3,6 +3,7 @@
 	public class AppConstants
 	{
 		public static string CACHEKEYSTATEANDLGA = "StatesAndLGAs";
+		public static string CACHEKEYLISTOFBANKS = "BankListsAPIResponse";
 		public static string EMAILORPHONEALREADYEXISTS = "Email or phone number already Exists";
 		public static string DATANOTFOUND = "Data Not available";
 		public static string SAVEERROR = "An error occured saving changes";
