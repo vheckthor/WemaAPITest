@@ -32,4 +32,5 @@ Note.
  - Pull the code and from dotnet cli or package manager console run `dotnet restore` to install the required packages.
  - Add the desired connection string or leave the default (provided Microsoft Sql is installed on the machine.
  - For the `GetAllBanks` endpoint you will require a subscription key to be added as your environment variable as `subscriptionKey`, you can get you subscription key by registering and login here https://wema-alatdev-apimgt.developer.azure-api.net/product#product=alat-tesh-test.
+ - run `[System.Environment]::SetEnvironmentVariable('subscriptionKey','your key here',[System.EnvironmentVariableTarget]::Machine)` to set the environment variable
  - Build the project from the cli or visual studio and launch the url to see the swagger Api documentation.
